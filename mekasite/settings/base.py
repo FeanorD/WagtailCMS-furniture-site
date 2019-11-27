@@ -163,6 +163,11 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+DEBUG = False
+
+SECRET_KEY = os.environ['SECRET_KEY']
+ALLOWED_HOSTS = ['*'] 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Wagtail settings
 
