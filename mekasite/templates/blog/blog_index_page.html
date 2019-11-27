@@ -1,0 +1,32 @@
+{% extends "base1.html" %}
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+{% block content %}
+<main id="main">
+        <section id="news">
+            <div class="uk-container uk-container-center">
+                <h2>Новости</h2>
+                <div class="section-inner " uk-grid>		
+                    {% for news in page.news_section.specific.children %}
+                        {% image news.image max-640x480 as image %}
+                        <a class="to-news" href="{{ news.url }}">
+                            <div class="news-item uk-card uk-card-default uk-grid-collapse uk-card-hover uk-child-width-1-2@s uk-margin" uk-grid>
+                                <div class="uk-flex-last@s uk-card-media-right uk-cover-container">
+                                    <img src="{{ image.url }}" alt="" uk-cover>
+                                    <canvas width="600" height="400"></canvas>
+                                </div>
+                                <div>
+                                    <div class="uk-card-body">
+                                        <h3 class="uk-card-title">{{ news.subtitle }}</h3>
+                                        <p>{{ news.date_published }}</p>
+                                        <p>{{ news.introduction|richtext|truncatechars_html:70 }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>			
+        </section>
+</main>
+{% endblock %}

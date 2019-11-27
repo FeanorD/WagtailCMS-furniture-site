@@ -1,0 +1,21 @@
+{% extends "base1.html" %}
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+{% block content %}
+{% image page.image max-1280x720 as photo %}
+<main id="main">
+    <section id="service-sec">  
+            <div class="uk-container uk-container-center">
+                <h2>{{ page.title_field }}</h2>
+                <div class="section-inner">
+                    <div class="uk-panel">
+                        <div class="service-img-container uk-align-center uk-align-right@m uk-margin-remove-adjacent">
+                            <img src="{{ photo.url }}" alt="Example image">
+                        </div>
+                        <p>{{ page.main_text|richtext }}</p>
+                    </div>
+                </div>
+            </div>
+    </section>
+</main>    
+{% endblock %}

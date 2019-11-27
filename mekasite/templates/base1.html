@@ -1,0 +1,89 @@
+{% load static wagtailcore_tags %}
+
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153490072-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-153490072-1');
+		</script>
+
+        <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		
+		<title>
+			{% block title %}
+				{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+			{% endblock %}
+			{% block title_suffix %}
+				{% with self.get_site.site_name as site_name %}
+					{% if site_name %}- {{ site_name }}{% endif %}
+				{% endwith %}
+			{% endblock %}
+		</title>
+
+        {% block meta %}
+
+        {% endblock %}
+
+		<link rel="shortcut icon" href="{% static 'home/images/meka_logo-head.png' %}" type="image/png">
+		<link rel="stylesheet" href="{% static 'css/mekasite.css' %}">
+		<link rel="stylesheet" href="{% static 'css/uikit.css' %}">
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+		<!--JS-->
+		<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+		<script src="{% static 'js/uikit.min.js' %}"></script>
+		<script src="{% static 'js/uikit-icons.min.js' %}"></script>
+	</head>
+	<body>
+        {% block header %}
+		<header id="page-header">		
+			<div class="uk-position-relative small-head">				
+				<div id="navbar" class="sec small">
+					<div class="sticky-nav" uk-sticky="show-on-up: true; animation: uk-animation-slide-top; bottom: #bottom">
+				        <nav class="uk-navbar-container uk-navbar-transparent " uk-navbar>
+				        	<a id="logo" href="{% slugurl 'home' %}" class="uk-navbar-brand" >
+				        		<img src="{% static 'home/images/meka_logo_1.svg' %}" alt="MEKA-logo" >
+				        		<img src="{% static 'home/images/meka_logo.svg' %}" alt="MEKA-logo" uk-scrollspy="cls:uk-animation-fade">
+				        	</a>
+				            <div class="menu-nav uk-navbar-right">				            	
+				                <ul class="uk-navbar-nav">				                  
+				                    <li><a href="#offcanvas-slide" class="uk-button uk-button-default menu-offcanvas" uk-toggle uk-icon="icon: menu" ><span>Меню </span> </a></li>				                    
+				                </ul>
+				            </div>
+				            <div id="offcanvas-slide" uk-offcanvas="flip: true; overlay: true">
+							    <div id="navbar-offcanvas" class="uk-offcanvas-bar">
+							        <ul class="uk-nav uk-nav-default">
+							        	<li><button id="offcanvas-close-button" class="uk-offcanvas-close" type="button" uk-close></button></li>
+										<li><a href="{% slugurl 'about' %}">О нас</a></li>
+										<li><a href="{% slugurl 'blog' %}">Блог</a></li>
+										<li><a href="{% slugurl 'projects' %}">Наши работы</a></li>				
+										<li><a href="{% slugurl 'contact' %}">Связаться с нами</a></li>						
+							        </ul>
+							    </div>
+							</div>
+				        </nav>
+				    </div>
+			    </div>				
+			</div>
+		</header>
+        {% endblock %}
+
+
+		<!--MAIN_SECTION-->
+        {% block content %}
+
+        {% endblock %}
+
+        
+        <footer id="footer">
+            {% include "includes/footer.html" %}
+		</footer>
+	</body>
+</html>

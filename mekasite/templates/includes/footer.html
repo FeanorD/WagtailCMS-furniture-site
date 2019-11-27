@@ -1,0 +1,26 @@
+{% load navigation_tags wagtailcore_tags static %}
+
+<div class="uk-container uk-container-center">
+    <div class="section-inner">
+        <div class="uk-grid-collapse uk-child-width-expand@s contact-list" uk-grid>
+            <div class="footer-grid-el">
+				<a id="logo" href="{% slugurl 'home' %}" >
+                    <img src="{% static 'home/images/meka_logo_1.svg' %}" alt="MEKA-logo" uk-scrollspy="cls:uk-animation-fade">
+                </a>
+                <div>
+				    <a href="{% slugurl 'about' %}">О компании</a>
+                    <p class="copyright">Copyright 2019 | All Rights Reserved | MEKA furniture</p>
+                </div>
+            </div>
+            <div class="work-time footer-grid-el">
+                <h3>Контакты</h3>
+                {% get_footer_text %}              
+            </div>
+            <div class="social-net footer-grid-el">
+                <h3>Подписывайтесь на нас</h3>
+                 <a class="uk-icon-button" uk-icon="instagram" href="https://www.instagram.com/meka_furniture" title="Instagram"></a>
+                <a class="uk-icon-button" uk-icon="facebook" href="https://www.facebook.com/MEKAfurniture" title="Facebook"></a>
+            </div>
+        </div>
+    </div>
+</div>

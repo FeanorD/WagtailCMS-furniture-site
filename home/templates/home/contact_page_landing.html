@@ -1,0 +1,17 @@
+{% extends "base1.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<main id="main-con">
+    <section id="main-section">
+            <div class="container form-page-thanks">
+                <div class="row">
+                    <div class="col-md-7">
+                        {{ page.thank_you_text|richtext }}
+                    </div>
+                </div>
+            </div>
+    </section>
+
+</main>
+{% endblock content %}

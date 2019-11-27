@@ -1,0 +1,142 @@
+{% extends "base1.html" %}
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+{% block header %}
+<!--HEADER-->
+<header id="page-header">
+        <div class="uk-position-relative" uk-height-viewport>
+            <div id="navbar" >
+                <div class="sticky-nav" uk-sticky="show-on-up: true; animation: uk-animation-slide-top; bottom: #bottom; top: 300">
+                    <nav class="uk-navbar-container uk-navbar-transparent uk-animation-slide-top" uk-navbar>
+                        <a id="logo" href="#" class="uk-navbar-brand" >
+                            <img src="{% static 'home/images/meka_logo_1.svg' %}" alt="MEKA-logo" >
+                            <img src=  "{% static 'home/images/meka_logo.svg' %}"  alt="MEKA-logo" uk-scrollspy="cls:uk-animation-fade">
+                        </a>
+                        <div class="menu-nav uk-navbar-right">
+                            <ul class="uk-navbar-nav">
+                                <li><a href="#offcanvas-slide" class="uk-button uk-button-default menu-offcanvas" uk-toggle uk-icon="icon: menu" uk-scroll><span>Меню </span> </a></li>
+                            </ul>
+                        </div>
+                        <div id="offcanvas-slide" uk-offcanvas="flip: true; overlay: true">
+                            <div id="navbar-offcanvas" class="uk-offcanvas-bar">
+                                <ul class="uk-nav uk-nav-default">
+                                    <li><button id="offcanvas-close-button" class="uk-offcanvas-close" type="button" uk-close></button></li>
+                                    <li><a href="{% slugurl 'about' %}">О нас</a></li>
+                                    <li><a href="{% slugurl 'blog' %}">Блог</a></li>
+                                    <li><a href="{% slugurl 'projects' %}">Наши работы</a></li>				
+                                    <li><a href="{% slugurl 'contact' %}">Связаться с нами</a></li>	
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div id="cover" uk-height-viewport></div>
+            <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="animation: fade; ratio: false; autoplay: true; pause-on-hover: false; velocity: 0.3; draggable: false">
+                <ul class="uk-slideshow-items" uk-height-viewport>
+                    {% for childpage in page.slideshow_section.specific.children %}                        
+                        <li>
+                            <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
+                                {% image childpage.image max-1920x1080 as ph %}
+                                <div class="uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light"
+                                    data-src="{{ ph.url }}"
+
+                                    data-sizes="(min-width: 650px) 650px, 100vw" uk-img uk-height-viewport >
+                                </div>
+                            </div>
+                            <div class="uk-container uk-container-center slide-inner">
+                                <div class="slide-center uk-position-center">
+                                    <p class="slide-span">{{ childpage.caption_field }}</p>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="uk-position-bottom-center explore">
+                <a href="#main" uk-scroll>Узнать больше</a>
+            </div>
+        </div>
+</header>
+{% endblock %}
+
+{% block content %}
+    {% image page.image_about max-1920x1080 as image_about %}
+    {% image page.image_news max-1920x1080 as image_news %}
+    {% image page.image_works max-1920x1080 as image_works %}	
+    <main id="main">
+        <section id="main-section">
+            <div class="uk-container uk-container-center">
+                <div class="section-inner">
+                    <div class="uk-grid-collapse main-grid uk-text-center" uk-grid>
+                        <div class="uk-width-expand main-grid-el">
+                            <div class=" uk-padding"><h3>{{ page.title_field }}</h3></div>
+                        </div>
+                        <div class="uk-width-expand main-grid-el">
+                            <div class="uk-padding uk-grid-large uk-child-width-expand@s uk-text-center grid-6 " uk-grid>
+                                <div class="grid-6-el-about">
+                                    <a href="{% slugurl 'about' %}" class="grid-card ">
+                                        <div class="uk-card uk-card-default uk-card-body uk-cover-container">
+                                            <img src="{{ image_about.url }}" alt="" uk-cover>
+                                            <canvas width="600" height="400"></canvas>
+                                            <div class="uk-position-bottom uk-overlay uk-overlay-default work-title card-our-works">
+                                                <div class="uk-position-center">
+                                                    <h3>О нас</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div >
+                                    <a href="{% slugurl 'blog' %}" class="grid-card ">
+                                        <div class="uk-card uk-card-default uk-card-body uk-cover-container">
+                                            <img src="{{ image_news.url }}" alt="" uk-cover>
+                                            <canvas width="600" height="400"></canvas>
+                                            <div class="uk-position-bottom uk-overlay uk-overlay-default work-title card-our-works">
+                                                <div class="uk-position-center">
+                                                    <h3>Новости</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-width-expand main-grid-el">
+                            <div class="uk-grid-collapse  uk-child-width-expand@s" uk-grid>
+                                <div class="uk-width-1-4 empty-el">
+                                </div>
+                                <div >
+                                    <a href="{% slugurl 'projects' %}" class="grid-card ">
+                                        <div class="uk-card uk-card-default uk-card-body uk-cover-container">
+                                            <img src="{{ image_works.url }}" alt="" uk-cover>
+                                            <canvas width="600" height="400"></canvas>
+                                            <div class="uk-position-bottom uk-overlay uk-overlay-default work-title card-our-works">
+                                                <div class="uk-position-center">
+                                                    <h3>Наши работы</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-width-expand main-grid-el">
+                            <div class="uk-grid-collapse  uk-child-width-expand@s" uk-grid>
+                                <div >
+                                    <div class="card-get-in-touch uk-flex uk-flex-center uk-flex-middle">
+                                        <p>У вас есть вопросы или вы хотите сделать заказ? Позвоните нам или напишите e-mail.</p>
+                                        <a href="{% slugurl 'contact' %}"  class="uk-button uk-button-default" >Связаться</a>
+                                    </div>
+                                </div>
+                                <div class="uk-width-1-2 empty-el">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>   
+{% endblock %}
+

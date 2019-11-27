@@ -1,0 +1,69 @@
+{% extends "base1.html" %}
+{% load static wagtailimages_tags wagtailcore_tags navigation_tags widget_tweaks %}
+
+{% block content %}
+<main id="main">
+    <section id="main-section" class="main-section-contact">
+        <div class="uk-container uk-container-center">
+            <div class="section-inner">
+                <div class="uk-grid-collapse main-grid " uk-grid>
+                    <div class="uk-width-expand main-grid-el">
+                        <div class="uk-padding uk-grid-large uk-child-width-expand@s " uk-grid>
+                            <div class="uk-width-1-3 us">
+                                <div class=" ">
+                                    Свяжитесь
+                                    
+                                    с нами	
+                                </div>
+                            </div>
+                            <div class="us-next">
+                            {% get_contacts %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-expand main-grid-el ">
+                        <div class="uk-grid-collapse  uk-child-width-expand@s" uk-grid>
+                            <div class="uk-width-1-3 empty-el g-map">
+                                    <a href="http://maps.google.com/?q={{ page.formatted_address }}">                                     
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3046.6778324830675!2d30.48007250254975!3d50.39434778779892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4c8da2a0b701f%3A0x1eeff07d491f746!2zNTDCsDIzJzQwLjgiTiAzMMKwMjgnNTMuNSJF!5e0!3m2!1sru!2sua!4v1574866195859!5m2!1sru!2sua" frameborder="0" allowfullscreen=""></iframe>
+                                    </a>                                   
+							</div>
+                            <div class="uk-padding contact-form form-page">
+                                <form action="{% pageurl page %}" method="POST" role="form">
+                                    {% csrf_token %}
+                                    {% if form.subject.errors %}
+                                        <ol role="alertdialog">
+                                        {% for error in form.subject.errors %}
+                                            <li role="alert"><strong>{{ error|escape }}</strong></li>
+                                        {% endfor %}
+                                        </ol>
+                                    {% endif %}
+                                    <fieldset class="uk-fieldset">
+                                    {% for field in form %}
+                                        <div class="uk-margin" aria-required={% if field.field.required %}"true"{% else %}"false"{% endif %}>
+                                            
+                                            {{ field.label_tag }}{% if field.field.required %}<span class="required">*</span>{% endif %}
+                                                                        
+                                            {% if field.field.field_type == multiline %}
+                                                {{ field|add_class:"uk-textarea"}}
+                                            {% else %}
+                                                {{ field|add_class:"uk-input"}}
+                                            {% endif %}
+
+                                            {% if field.help_text %}
+                                                <p class="help">{{ field.help_text|safe }}</p>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                        <input type="submit" class="uk-button uk-button-default">
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>    
+{% endblock %}

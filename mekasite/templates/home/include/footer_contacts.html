@@ -1,0 +1,14 @@
+  
+{% load wagtailcore_tags %}
+
+{% for contact in footer_contacts %}
+    <p>
+        <a href="http://maps.google.com/?q={{ contact.formatted_address }}"><p class="adress">{{ contact.address }}</p></a>
+        <br>
+        <a href="mailto:{{ contact.email }}"><p>{{ contact.email }}</p></a>
+        <br>
+        <a href="tel:{{ contact.phone }}"><p>{{ contact.phone }}</p></a>
+        <br>
+    	<a href="{% slugurl 'contact' %}"><p>Обратная связь</p></a>
+    </p>
+{% endfor %}

@@ -1,0 +1,31 @@
+{% extends "base1.html" %}
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+{% block content %}
+<main id="main">
+    <section id="works">
+        <div class="uk-container uk-container-center">
+            <h2>Наши работы</h2>
+            <div class="section-inner uk-grid-small uk-child-width-1-3@m uk-child-width-1-2@s uk-text-center" uk-grid="masonry: true" uk-lightbox="animation: slide">
+                {% for work in page.works_section.specific.children %}
+                    {% image work.image max-1280x720 as image %}
+                    <div class="work-item">
+                        <a class="uk-inline" href="{{ image.url }}" data-caption="{{ work.introduction }}">
+                            <div class="uk-card uk-card-default uk-card-body uk-cover-container uk-transition-toggle uk-inline-clip">
+                                <img src="{{ image.url }}" alt="{{ image.alt }}" uk-cover>
+                                <canvas width="{{ image.width }}" height="{{ image.height }}"></canvas>
+                                <div class="uk-transition-fade uk-position-bottom uk-overlay uk-overlay-default work-title">
+                                    <div class="uk-position-center">
+                                        <h3>{{ work.subtitle }}</h3>
+                                        <p>Просмотреть</p>
+                                </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

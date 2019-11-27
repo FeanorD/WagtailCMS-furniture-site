@@ -1,0 +1,46 @@
+{% extends "base1.html" %}
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+{% block content %}
+{% image page.image max-1280x720 as photo %}
+<main id="main">
+    <section id="about-us">
+        <div class="uk-container uk-container-center">
+            <h2>О компании</h2>
+            <div class="section-inner">						
+                <div class="uk-child-width-expand@s" uk-grid>
+                    <div class="uk-grid-item-match about-card">
+                        <div class="uk-card uk-card-default uk-card-body about-card-left">
+                            <img src="{{ photo.url }}" alt="{{ page.title_field }}" class="primary">
+                            <div class="about-text-left">             
+                                <p>{{ page.image_text|richtext }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-card">
+                        <h3>{{ page.title_field }}</h3>
+                        <p>{{ page.main_text|richtext }}</p>
+                    </div>
+                </div>
+                <h3>Наши услуги</h3>
+                <div class="uk-grid-small uk-child-width-1-4@m uk-child-width-1-2@s uk-flex-center uk-text-center our-services" uk-grid>
+                    {% for childpage in page.services_section.specific.children %}
+                        {% image childpage.image max-640x480 as ph %}
+                        <a href='{{ childpage.url }}'>
+                            <div class="service-card">
+                                <div class="uk-card uk-card-default uk-inline uk-card-body uk-cover-container ">
+                                    <img src='{{ ph.url }}' alt="{{ childpage.title_field }}" uk-cover>
+                                    <canvas width="600" height="400"></canvas>
+                                    <div class="uk-overlay uk-overlay-default uk-position-bottom">
+                                        <p>{{ childpage.title_field }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

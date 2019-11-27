@@ -1,0 +1,17 @@
+{% extends "base1.html" %}
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+{% block content %}
+<main id="main">
+    <section id="modal-lightbox">
+            <div class="uk-grid-collapse uk-flex-center lightbox-flex" uk-grid>
+                <div class=" new-light-second uk-container uk-container-center uk-card uk-card-default uk-card-body">
+                    <h2>{{ page.subtitle }}</h2>
+                    <h3>{{ page.date_published }}</h3>
+                    <p>{{ page.introduction|richtext }}</p>
+                    <a href="{% slugurl 'blog' %}">К списку новостей</a>
+                </div>
+            </div>
+    </section>
+</main>
+{% endblock %}

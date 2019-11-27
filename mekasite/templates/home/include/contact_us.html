@@ -1,0 +1,28 @@
+{% load wagtailcore_tags %}
+
+{% for contact in footer_contacts %}
+<div class="uk-grid-medium uk-child-width-expand@s" uk-grid>
+    <div class="min-contact">
+        <div class="contact-card">
+            <p>
+                <a href="http://maps.google.com/?q={{ contact.formatted_address }}">
+                    МЕКА мебель
+                    <br>
+                    {{ contact.address }}
+                    <br>
+                    Киев, Украина
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class="min-contact">
+        <div class="contact-card">
+            <p>
+                <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+                <br>
+                <a href="tel:{{ contact.phone }}">{{ contact.phone }}</a>
+            </p>
+        </div>
+    </div>
+</div>    
+{% endfor %}
