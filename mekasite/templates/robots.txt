@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /webmail/
+Disallow: /login.php
+Disallow: /*.php$
+Allow: .js
+Allow: .css
+Allow: .jpg
+Host: https://meka-furniture.com.ua
+Sitemap: https://meka-furniture.com.ua/sitemap.xml
